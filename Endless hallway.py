@@ -42,6 +42,8 @@ hitbox = pygame.Rect((1700/2 , y_pos, 50, 100))
 feet_hitbox = pygame.Rect((1700/2, y_pos + 80, 50, 20))
 
 
+
+
 clock = pygame.time.Clock()
 running = True
 while running:
