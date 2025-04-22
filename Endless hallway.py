@@ -1,12 +1,16 @@
 import pygame
 import random
+from floor import *
 
 pygame.init()
 
-pygame.display.set_caption("hallway.exe")
+pygame.display.set_caption("hello")
 screen_size = (1700, 750)
 
 display = pygame.display.set_mode(screen_size)
+
+player_image = pygame.image.load("Guy.png")
+player_image = pygame.transform.scale(player_image, (50,105))
 
 floor_pos = [0, 1700]
 floor_spawn_pos = 850
@@ -44,6 +48,9 @@ feet_hitbox = pygame.Rect((1700/2, y_pos + 80, 50, 20))
 
 
 
+
+
+
 clock = pygame.time.Clock()
 running = True
 while running:
@@ -52,6 +59,14 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+
+    #floor --> INCLUDES DRAWING THE FLOOR
+    times_repeated = 0
+    for pos in floor_pos:
+        pygame.draw.rect(display, floor_color[times_repeated], (-x_pos + pos, 0, 1690, 750))
+        times_repeated += 1
+
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
@@ -113,11 +128,11 @@ while running:
         floor_pos.pop(0)
         floor_color.pop(0)
 
-    #floor
-    times_repeated = 0
-    for pos in floor_pos:
-        pygame.draw.rect(display, floor_color[times_repeated], (-x_pos + pos, 0, 1690, 750))
-        times_repeated += 1
+
+
+    # Draw Player
+    display.blit(player_image, hitbox)
+
     
 
     hitbox = pygame.Rect((1700/2 , y_pos, 50, 100))
